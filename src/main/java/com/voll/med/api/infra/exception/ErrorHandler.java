@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -20,6 +22,8 @@ import jakarta.persistence.EntityNotFoundException;
 @RestControllerAdvice
 public class ErrorHandler {
     
+    private static final String AN_UNKNOW_ERROR_HAS_OCCURED = "An unknow error has occured";
+
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<String> handleNotFoundException () {
         return ResponseEntity.notFound().build();
@@ -33,12 +37,17 @@ public class ErrorHandler {
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public ResponseEntity<String> handleSQLException(SQLIntegrityConstraintViolationException sqlIntegrityException) {
-        return ResponseEntity.badRequest().body("An unknow error has occured");
+        return ResponseEntity.badRequest().body(AN_UNKNOW_ERROR_HAS_OCCURED);
+    }
+
+    @ExceptionHandler(DataAccessException.class)
+    public ResponseEntity<String> handleSQLException(DataAccessException sqlGenericException) {
+        return ResponseEntity.badRequest().body(AN_UNKNOW_ERROR_HAS_OCCURED);
     }
 
     @ExceptionHandler(SQLException.class)
     public ResponseEntity<String> handleSQLException(SQLException sqlGenericException) {
-        return ResponseEntity.badRequest().body("An unknow error has occured");
+        return ResponseEntity.badRequest().body(AN_UNKNOW_ERROR_HAS_OCCURED);
     }
 
     public record DadosErrosValidacao(String field, String message) {

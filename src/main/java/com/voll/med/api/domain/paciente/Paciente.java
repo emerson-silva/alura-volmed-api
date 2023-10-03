@@ -33,6 +33,7 @@ public class Paciente {
         this.telefone = dados.telefone();
         this.cpf = dados.cpf();
         this.endereco = new Endereco(dados.endereco());
+        this.ativo = Boolean.TRUE;
     }
 
     public void atualizarPaciente(DadosAtualizarPaciente dados) {

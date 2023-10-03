@@ -35,7 +35,7 @@ public class Medico {
         this.crm = dados.crm();
         this.especialidade = dados.especialidade();
         this.endereco = new Endereco(dados.endereco());
-        // nao precisa setar a flag ativa pois o padrao do banco é ativo
+        this.ativo = Boolean.TRUE;
     }
 
     public void atualizarInformacoes(DadosAtualizarMedico dados) {

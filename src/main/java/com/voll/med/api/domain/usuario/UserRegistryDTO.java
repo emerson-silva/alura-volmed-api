@@ -1,14 +1,15 @@
 package com.voll.med.api.domain.usuario;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public record UserRegistryDTO(
     @NotBlank
     String login,
-    @NotBlank @Min(value = 8) @Max (16)
+    @NotBlank @Size(min = 8, max = 16)
     String password
 ) {
-    
+    public UserRegistryDTO withUpdatedPassword(String newPasswordHash) {
+        return new UserRegistryDTO(login, newPasswordHash);
+    }
 }

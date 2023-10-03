@@ -24,6 +24,9 @@ import com.voll.med.api.domain.paciente.DadosDetalhamentoPaciente;
 import com.voll.med.api.domain.paciente.DadosListagemPaciente;
 import com.voll.med.api.domain.paciente.DadosPaciente;
 import com.voll.med.api.domain.paciente.PacienteRepository;
+
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 import com.voll.med.api.domain.paciente.Paciente;
 
 import jakarta.validation.Valid;
@@ -32,6 +35,7 @@ import lombok.Getter;
 @Getter
 @RestController
 @RequestMapping("/pacientes")
+@SecurityRequirement(name = "bearer-key")
 public class PacienteController {
 
     @Autowired

@@ -14,6 +14,7 @@ import com.voll.med.api.domain.usuario.Usuario;
 import com.voll.med.api.infra.security.DadosTokenJWT;
 import com.voll.med.api.infra.security.TokenService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController

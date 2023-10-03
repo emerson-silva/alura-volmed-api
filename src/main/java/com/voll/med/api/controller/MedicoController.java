@@ -25,6 +25,9 @@ import com.voll.med.api.domain.medico.DadosDetalhamentoMedico;
 import com.voll.med.api.domain.medico.DadosListagemMedico;
 import com.voll.med.api.domain.medico.DadosMedico;
 import com.voll.med.api.domain.medico.MedicoRepository;
+
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 import com.voll.med.api.domain.medico.Medico;
 
 import jakarta.validation.Valid;
@@ -33,6 +36,7 @@ import lombok.Getter;
 @Getter
 @RestController
 @RequestMapping("/medicos")
+@SecurityRequirement(name = "bearer-key")
 public class MedicoController {
 
     @Autowired
@@ -59,8 +63,7 @@ public class MedicoController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoMedico> detalharMedico (@PathVariable Long id) {
         Optional<Medico> medico = getRepository().findById(id);
         if (medico.isPresent()) {
